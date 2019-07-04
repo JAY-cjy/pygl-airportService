@@ -53,38 +53,13 @@ header {
     }
 }
 
-.city {
+.plane {
+    display: block;
     margin-top: 1rem;
-
-    .title {
-        height: 0.68rem;
-        line-height: 0.68rem;
-        font-size: 0.48rem;
-        background-color: #f5f5f5;
-        padding-left: 0.20rem;
-        display: block;
-        color: #333;
-        font-weight: 400;
-    }
-
-    .ul {
-        display: block;
-        height: 0.86rem;
-        line-height: 0.86rem;
-        padding-left: 0.20rem;
-        border-bottom: 1px solid #c8c8c8;
-        border-image: url(http://pic.c-ctrip.com/h5/visa/border_half.png) 2 stretch;
-    }
-
-    .li {
-        div {
-            font-size: .3rem;
-            // height: 0.48rem;
-            line-height: 0.48rem;
-            // word-wrap: break-word;
-            padding-left: 0.1rem;
-            border-bottom: 1px solid #c8c8c8;
-            border-image: url(http://pic.c-ctrip.com/h5/visa/border_half.png) 2 stretch;
-        }
-    }
+    height: 0.86rem;
+    line-height: 0.86rem;
+    padding-left: 0.20rem;
+    background-color: white;
+    border-bottom: 1px solid #c8c8c8;
+    border-image: url(http://pic.c-ctrip.com/h5/visa/border_half.png) 2 stretch;
 }

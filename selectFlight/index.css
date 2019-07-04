@@ -11,6 +11,11 @@ html {
   display: none;
 }
 
+body {
+  font-size: .36rem;
+  background: #f4f4f4;
+}
+
 header {
   position: fixed;
   left: 0;
@@ -144,7 +149,7 @@ header h2 {
   font-size: .36rem;
   position: absolute;
   height: 100%;
-  width: 100%;
+  width: inherit;
   line-height: 1.1rem;
 }
 #airportService .plane .plane-info .form-row input {

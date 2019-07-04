@@ -1,12 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>city</title>
+    <link rel="stylesheet" href="../public/cssReset.css">
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
-    
+    <header>
+        <b class="iconfont icon-zuojiantou-copy back"></b>
+        <h2>选择地址</h2>
+    </header>
+
+    <div class="city" v-cloak>
+        <div class="title">B</div>
+        <div class="ul" v-on:click="showCity" data-city="bm">白马（kep）</div>
+        <div class="li" v-show="showCityList == 'bm' ? 'true': false">
+            <div>白马海滩（kep beach）</div>
+            <div>白马市国家公园（kep national park）</div>
+            <div>沙莫朗西庙（wat samot raingsey）</div>
+            <div>托尼船坞（koh tunsay pier）</div>
+            <div>兔子岛码头（rabbit island pier）</div>
+            <div>白马省派出所（commissariat police of kep provience）</div>
+        </div>
+        <div class="title">C</div>
+        <div class="ul" v-on:click="showCity" data-city="xh">西哈努克（sihanoukville）</div>
+        <div class="li" v-show="showCityList == 'xh' ? 'true' : false">
+            <div>西港独立碑（sihanoukville independence park）</div>
+            <div>胜利海滩（victory beach）</div>
+            <div>独立海滩（independence beach）</div>
+            <div>西港国际港口（sihanoukville autonomous port）</div>
+            <div>卡龙寺庙（wat utynieng）</div>
+            <div>卡龙寺庙（wat kroum）</div>
+            <div>西哈努克市童风村（village d＇enfants de sihanoukville）</div>
+            <div>海豚广场（Dolphins circle）</div>
+            <div>西哈努克高中（sihanoukville high school）</div>
+            <div>科荣潜水中心供应码头（koh rong dive center supply pier）</div>
+            <div>火车站（railway station）</div>
+            <div>贸易菜市场（peanichkam market）</div>
+            <div>拉尔寺庙（wat chotynieng）</div>
+            <div>拉尔寺庙（wat leu）</div>
+            <div>拉尔寺庙（leu pagoda）</div>
+            <div>双狮广场（golden lions roundabout）</div>
+            <div>吴哥啤酒厂（cambrew beer factory）</div>
+            <div>西哈努克贸易中心（sihanoukville trade center）</div>
+            <div>沙尔市小学（phsar leu primary school）</div>
+            <div>珍宝海滩（serendipity beach）</div>
+            <div>奥克提尔海滩（ochheuteal beach）</div>
+            <div>建设光明大学西哈努克校区（Build Bright University Sihanouk Province Campus）</div>
+            <div>高中（high school）</div>
+            <div>西哈努克省转诊医院（preah sihanouk province referral hospital）</div>
+            <div>奥克斯海滩（otres beach ）</div>
+            <div>奥克斯海滩1（otres beach 1）</div>
+            <div>奥克斯海滩2（otres beach 2）</div>
+            <div>欧特斯寺庙（wat otres/Ou Treh Pagoda）</div>
+            <div>欧特斯村（otres village area）</div>
+            <div>卡巴彩瀑布（Kbalchhay waterfall）</div>
+            <div>科保柴瀑布（Kbalchhay waterfall）</div>
+            <div>巴尔塘海滩（prek treng beach）</div>
+            <div>巴尔塘海滩（samdech hun sen beach）</div>
+            <div>云壤海滩（ream beach）</div>
+            <div>云壤国家公园（ream national park）</div>
+            <div>灵尔国家公园（ream national park）</div>
+        </div>
+        <div class="title">G</div>
+        <div class="ul" v-on:click="showCity" data-city="gb">贡布（kampot）</div>
+        <div class="li" v-show="showCityList == 'gb' ? true : false">
+            <div>榴莲环岛（Kampuchea durian roundabout）</div>
+            <div>贡布市政厅（kampot provincial hall）</div>
+            <div>盐工环岛（salt workers roundabout）</div>
+            <div>贡布沙玛奇市场（phsar samaki kampot）</div>
+            <div>贡不贝庙（wat kampong bay）</div>
+            <div>贡布省医院（Kampot Referral Hospital）</div>
+            <div>新贡布圈（New Kampot Circle）</div>
+            <div>白马圈（White Horse Circle）</div>
+        </div>
+        <div class="ul" v-on:click="showCity" data-city="gg">国公(koh kong)</div>
+        <div class="li" v-show="showCityList == 'gg' ? true : false">
+            <div>国公独立碑（Kaoh Kong Independence）</div>
+            <div>国公圈（Kaoh Kong Circle）</div>
+        </div>
+    </div>
+
+
+    <!-- 以后做循环city -->
+    <!-- <div wx:for="{{letterList}}" wx:for-index="index" wx:for-item="item" wx:key="{{index}}">
+        <div id="{{item}}" class="title">
+            {{item}}
+        </div>
+        <div class="li" wx:for="{{cityList[item]}}" wx:for-index="index2" wx:for-item="item2" wx:key="{{index2}}"
+            bindtap='clickCity' data-city="{{item2.name}}">
+            {{item2.name}}
+        </div>
+    </div> -->
+
+    <!-- vue引入 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- jq引入 -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script src="index.js"></script>
 </body>
+
 </html>
