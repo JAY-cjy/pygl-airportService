@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>airportService</title>
+    <link rel="stylesheet" href="../public/cssReset.css">
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <header>
+        <b class="iconfont icon-zuojiantou-copy back"></b>
+        <h2>接送机</h2>
+    </header>
+    <!-- fontsize自适应js -->
+    <!-- <script>
+        ! function (e, t) {
+            var o = e.documentElement,
+                n = "orientationchange" in window ? "orientationchange" : "resize",
+                i = function () {
+                    var e = o.clientWidth;
+                    if (e) {
+                        var t = 100 < e / 375 * 50 ? 100 : e / 375 * 50;
+                        o.style.fontSize = t + "px";
+                        var n = document.createElement("div");
+                        n.style.width = "1.4rem", n.style.height = "0", document.body.appendChild(n);
+                        var i = 1.4 * t,
+                            d = n.clientWidth / i;
+                        (1.1 < d || d < .9) && (o.style.fontSize = t / d + "px"), document.body.removeChild(n)
+                    }
+                };
+            e.addEventListener && (i(), t.addEventListener(n, i, !1), e.addEventListener("DOMContentLoaded", i, !1))
+        }(document, window)
+    </script> -->
+
+    <div id="airportService" v-cloak>
+        <div class="plane">
+            <div class="plane-info">
+                <div class="info-title">
+                    <ul>
+                        <li v-bind:class="[type == 'join' ? 'active' : '']" v-on:click.self="changeService"
+                            data-type="join">
+                            接机
+                        </li>
+                        <li v-bind:class="[type == 'send' ? 'active' : '']" v-on:click.self="changeService"
+                            data-type="send">
+                            送机
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="info-content" v-show="type == 'join'">
+                    <div class="form-row" id="J-endAir">
+                        <i class="icon-plane"></i>
+                        <input type="text" placeholder="选择接机航班" readonly="">
+                    </div>
+
+                    <div class="form-row" id="J-dest">
+                        <i class="icon-place"></i>
+                        <span class="placeholder">送达目的地</span>
+                    </div>
+                </div>
+
+                <div class="info-content2" v-show="type == 'send'">
+                    <div class="form-row" id="J-endAir">
+                        <i class="icon-plane"></i>
+                        <span class="placeholder">送机场</span>
+                    </div>
+
+                    <div class="form-row" id="J-dest">
+                        <i class="icon-place"></i>
+                        <span class="placeholder">自哪儿上车？</span>
+                    </div>
+
+                    <div class="form-row" id="J-timeSelect">
+                        <i class="icon-time"></i>
+                        <span class="placeholder">用车时间（当地时间）</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="plane-car">
+            <div class="car-box">
+                <div class="top clearfix">
+                    <h5>选择车型</h5>
+                </div>
+                <ul class="cars">
+                    <li class="box-line car-list checked">
+                        <ul class="car-item">
+                            <div class="radio"> <span class="out"><i class="in"></i></span> </div>
+                            <li class="car-type">
+                                <p class="name">紧凑5座 + 中文司导 </p>
+                            </li>
+                            <li class="price"><span>227</span></li>
+                        </ul>
+                        <div class="car-info">
+                            <p>参考车型 ：本田锋范,本田思域,丰田威驰或同级别车型</p>
+                        </div>
+                    </li>
+                    <li class="box-line car-list">
+                        <ul class="car-item">
+                            <li class="radio"> <span class="out"><i class="in"></i></span> </li>
+                            <li class="car-type">
+                                <p class="name">舒适5座 + 中文司导 </p>
+                            </li>
+                            <li class="price"><span>240</span></li>
+                        </ul>
+                        <div class="car-info">
+                            <p>参考车型 ：丰田凯美瑞,本田CRV,日产Almera或同级别车型</p>
+                        </div>
+                    </li>
+                    <li class="box-line car-list">
+                        <ul class="car-item">
+                            <li class="radio"> <span class="out"><i class="in"></i></span> </li>
+                            <li class="car-type">
+                                <p class="name">东南亚·经济7座 + 中文司导 </p>
+                            </li>
+                            <li class="price"><span>273</span></li>
+                        </ul>
+                        <div class="car-info">
+                            <p>参考车型：丰田avanza，丰田innova伊诺凡</p>
+                        </div>
+                    </li>
+                    <li class="box-line car-list car-more"
+                        style="transform-origin: 0px 0px; opacity: 1; transform: scale(1, 1);">
+                        <ul class="car-item">
+                            <li class="radio"> <span class="out"><i class="in"></i></span> </li>
+                            <li class="car-type">
+                                <p class="name">东南亚·舒适7座 + 中文司导</p>
+                            </li>
+                            <li class="price"><span>321</span></li>
+                        </ul>
+                        <div class="car-info">
+                            <p>参考车型：丰田Fortuner 、三菱帕杰罗</p>
+                        </div>
+                    </li>
+                    <li class="box-line car-list car-more"
+                        style="transform-origin: 0px 0px; opacity: 1; transform: scale(1, 1);">
+                        <ul class="car-item">
+                            <li class="radio"> <span class="out"><i class="in"></i></span> </li>
+                            <li class="car-type">
+                                <p class="name">舒适9座 + 中文司导</p>
+                            </li>
+                            <li class="price"><span>340</span></li>
+                        </ul>
+                        <div class="car-info">
+                            <p>参考车型 ：丰田海狮,现代H1或同级别车型</p>
+                        </div>
+                    </li>
+                    <li class="box-line car-list car-more"
+                        style="transform-origin: 0px 0px; opacity: 1; transform: scale(1, 1);">
+                        <ul class="car-item">
+                            <li class="radio"> <span class="out"><i class="in"></i></span> </li>
+                            <li class="car-type">
+                                <p class="name">舒适12座 + 中文司导</p>
+                            </li>
+                            <li class="price"><span>406</span></li>
+                        </ul>
+                        <div class="car-info">
+                            <p>参考车型 ：丰田海狮,现代H1或同级别车型</p>
+                        </div>
+                    </li>
+                </ul>
+                <div class="J-more">
+                    <div id="J-more">
+                        <span>收起</span>
+                        <i class="arrow retract"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="J-luggage-wrap">
+                <div class="img"></div>
+            </div>
+        </div>
+
+        <div class="box plane-contact">
+            <div class="box-line">
+                <h5>联系人</h5>
+                <input type="text" class="form fix-position J-sa" id="contactName" data-sa-title="联系人" value=""
+                    placeholder="请输入联系人姓名"> <!-- <i class="clearVal icon-ioc56"></i> -->
+            </div>
+            <div class="box-line">
+                <h5>联系电话</h5>
+                <span class="code-box"> + <input type="tel" class="qh" id="" data-sa-title="区号" value=""
+                        placeholder="86"></span>
+                <input type="tel" class="form contactTel fix-position J-sa" id="contactTel" data-sa-title="联系电话"
+                    value="" placeholder="请输入联系人电话">
+            </div>
+            <div class="box-line" style="">
+                <h5>备注信息</h5>
+                <input type="text" class="form fix-position J-sa" id="contactRemark" data-sa-title="备注信息" value=""
+                    placeholder="给司导捎句话">
+            </div>
+        </div>
+
+        <div class="plane-confirm">
+            <div class="confirm-box clearfix">
+                <div class="price-info">
+                    费用总计：￥227
+                </div>
+                <div class="submit" id="submit">去支付</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- vue引入 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- jq引入 -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,226 @@
+body,
+html {
+  width: 100%;
+  height: 100%;
+  font-size: 13.3335vw;
+  background: #f5f5f5;
+  font-family: PingFangSC-Regular, Noto Sans CJK SC, Source Han Sans CNArial, Helvetica, sans-serif;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  width: 100%;
+  height: 1rem;
+  line-height: 1rem;
+  background-color: #fff;
+  color: #000;
+  border-bottom: 1px solid #dbdbdb;
+}
+header .back {
+  width: 1rem;
+  height: 1rem;
+  position: absolute;
+  left: .2rem;
+  color: #000;
+  font-size: .4rem;
+}
+header .back:before {
+  font-size: .35rem;
+  line-height: 1rem;
+}
+header h2 {
+  text-align: center;
+  font-size: .34rem;
+  color: #000;
+}
+
+#airportService {
+  padding-top: 1.2rem;
+}
+#airportService .plane {
+  width: 7.5rem;
+  padding-bottom: 1.2rem;
+  color: #111;
+  position: relative;
+}
+#airportService .plane .plane-info {
+  width: 7.1rem;
+  margin: 0 auto;
+  padding: 0 .2rem;
+  background: #fff;
+  border-radius: .06rem;
+  margin-bottom: .2rem;
+}
+#airportService .plane .plane-info .info-title {
+  background-image: url(https://fr-static.huangbaoche.com/20180802/h-b.ceb025d18324080c.png);
+  -webkit-background-size: auto 1px;
+  -moz-background-size: auto 1px;
+  background-size: auto 1px;
+  background-repeat: repeat-x;
+  background-position: 0 100%;
+}
+#airportService .plane .plane-info .info-title ul {
+  display: flex;
+}
+#airportService .plane .plane-info .info-title ul .active {
+  border-bottom: .08rem solid #ffc828;
+  color: #ffc828;
+}
+#airportService .plane .plane-info .info-title ul li {
+  height: .9rem;
+  line-height: .9rem;
+  text-align: center;
+  font-size: .3rem;
+  color: #4a4a4a;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  position: relative;
+}
+#airportService .plane .plane-info .info-title ul li a {
+  display: block;
+}
+#airportService .plane .plane-info .form-row {
+  height: 1.1rem;
+  background-image: url(https://fr-static.huangbaoche.com/20180802/h-b.ceb025d18324080c.png);
+  -webkit-background-size: auto 1px;
+  -moz-background-size: auto 1px;
+  background-size: auto 1px;
+  background-repeat: repeat-x;
+  background-position: 0 100%;
+  position: relative;
+  padding: 0 0 0 .9rem;
+}
+#airportService .plane .plane-info .form-row:last-child {
+  background-image: none;
+}
+#airportService .plane .plane-info .form-row i {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  position: absolute;
+  left: .1rem;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+#airportService .plane .plane-info .form-row i.icon-plane {
+  width: .38rem;
+  height: .38rem;
+  background-image: url(https://fr-static.huangbaoche.com/20180802/plane.2c47e6c6b7a96561.png);
+}
+#airportService .plane .plane-info .form-row i.icon-time {
+  width: .34rem;
+  height: .34rem;
+  border-bottom: 0;
+  background: url(https://fr-static.huangbaoche.com/20180802/date.9a8d84c221820b48.png) no-repeat 0;
+  -webkit-background-size: .34rem .34rem;
+  -moz-background-size: .34rem .34rem;
+  background-size: .34rem .34rem;
+}
+#airportService .plane .plane-info .form-row .placeholder {
+  font-size: .36rem;
+  color: #cecece;
+  z-index: 2;
+  background: white;
+  pointer-events: none;
+}
+#airportService .plane .plane-info .form-row .date {
+  font-size: .36rem;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  line-height: 1.1rem;
+}
+#airportService .plane .plane-info .form-row input {
+  font-size: .36rem;
+  color: #111;
+  vertical-align: middle;
+  width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+#airportService .plane .plane-info .form-row ::-webkit-input-placeholder,
+#airportService .plane .plane-info .form-row [placeholder],
+#airportService .plane .plane-info .form-row input[placeholder] {
+  color: #cecece;
+}
+#airportService .plane .plane-info .form-row input[type=text] {
+  outline: none;
+  line-height: normal;
+}
+#airportService .plane .plane-info #J-dest,
+#airportService .plane .plane-info #J-endAir,
+#airportService .plane .plane-info #J-timeSelect {
+  display: flex;
+  align-items: center;
+}
+#airportService .plane .search-btn {
+  display: block;
+  margin: .3rem .22rem .06rem;
+  height: 1rem;
+  line-height: 1rem;
+  background: #ffc828;
+  color: #111;
+  font-size: .36rem;
+  text-align: center;
+}
+
+.layui-laydate {
+  width: 100%;
+  height: 8rem;
+  position: absolute;
+  left: 0 !important;
+  right: 0;
+  margin: 0 !important;
+}
+.layui-laydate .layui-laydate-main {
+  width: 100%;
+}
+.layui-laydate .layui-laydate-main .layui-laydate-content tr {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.layui-laydate .layui-laydate-main .layui-laydate-content td {
+  width: 1.02rem;
+  height: 1.02rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.layui-laydate .layui-laydate-main .layui-laydate-content td .laydate-day-mark {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.24rem;
+  line-height: normal;
+  overflow: hidden;
+}
+.layui-laydate .laydate-footer-btns span {
+  height: 0.7rem;
+  line-height: 0.7rem;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>airportService</title>
+    <link rel="stylesheet" href="../public/cssReset.css">
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <header>
+        <b class="iconfont icon-zuojiantou-copy back"></b>
+        <h2>选择航班</h2>
+    </header>
+    <!-- fontsize自适应js -->
+    <!-- <script>
+        ! function (e, t) {
+            var o = e.documentElement,
+                n = "orientationchange" in window ? "orientationchange" : "resize",
+                i = function () {
+                    var e = o.clientWidth;
+                    if (e) {
+                        var t = 100 < e / 375 * 50 ? 100 : e / 375 * 50;
+                        o.style.fontSize = t + "px";
+                        var n = document.createElement("div");
+                        n.style.width = "1.4rem", n.style.height = "0", document.body.appendChild(n);
+                        var i = 1.4 * t,
+                            d = n.clientWidth / i;
+                        (1.1 < d || d < .9) && (o.style.fontSize = t / d + "px"), document.body.removeChild(n)
+                    }
+                };
+            e.addEventListener && (i(), t.addEventListener(n, i, !1), e.addEventListener("DOMContentLoaded", i, !1))
+        }(document, window)
+    </script> -->
+
+    <div id="airportService" v-cloak>
+        <div class="plane">
+            <div class="plane-info">
+                <div class="info-title">
+                    <ul>
+                        <li class="active">
+                            按航班号
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="info-content" v-show="type == 'join'">
+                    <div class="form-row" id="J-endAir">
+                        <i class="icon-plane"></i>
+                        <input type="text" placeholder="航班号，如CA979" readonly="">
+                    </div>
+
+                    <div class="form-row" id="J-dest">
+                        <i class="icon-time"></i>
+                        <span class="placeholder" v-show="showDate == 'false'">起飞日期（当地时间）</span>
+                        <span class="date">{{date}}</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="search-btn">查询</div>
+        </div>
+    </div>
+    <!-- layDate引入 -->
+    <script src="../layDate-v5.0.9/laydate/laydate.js"></script>
+    <!-- vue引入 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- jq引入 -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
