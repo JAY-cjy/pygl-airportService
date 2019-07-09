@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>plane</title>
+    <title>flightList</title>
     <link rel="stylesheet" href="../public/cssReset.css">
     <link rel="stylesheet" href="../iconfont/iconfont.css">
     <link rel="stylesheet" href="index.css">
@@ -14,10 +14,17 @@
 <body>
     <header>
         <a href="javascript:history.go(-1);"><b class="iconfont icon-zuojiantou-copy back"></b></a>
-        <h2>请选择机场</h2>
+        <h2>请选择机场<span class="takeOffTime"></span></h2>
     </header>
 
-    <div class="plane">西哈努克国际机场</div>
+    <div class="scroller" v-cloak>
+        <ul>
+            <li v-for="(item, index) in flightDetails" :key="index" v-on:click="goTobus(index)">
+                <h4>{{item.flightNumber}}</h4>
+                <p><span>{{item.deptime}}<small>{{item.depName}}</small></span><span>{{item.arrtime}}<small>{{item.arrName}}</small></span></p>
+            </li>
+        </ul>
+    </div>
 
 
     <!-- vue引入 -->

@@ -13,7 +13,7 @@
 
 <body>
     <header>
-        <b class="iconfont icon-zuojiantou-copy back"></b>
+        <a href="javascript:history.go(-1);"><b class="iconfont icon-zuojiantou-copy back"></b></a>
         <h2>选择航班</h2>
     </header>
 
@@ -52,7 +52,7 @@
                 <div class="info-content" v-show="type == 'join'">
                     <div class="form-row" id="J-endAir">
                         <i class="icon-plane"></i>
-                        <input type="text" placeholder="航班号，如CA979" readonly="">
+                        <input type="text" v-model="flightNumber" placeholder="航班号，如CA979">
                     </div>
 
                     <div class="form-row" id="J-dest">
@@ -64,7 +64,9 @@
 
             </div>
 
-            <div class="search-btn">查询</div>
+            <div class="search-btn" v-on:click="search">查询</div>
+
+            <div v-show="searchResult" style="text-align: center; margin: .3rem .22rem .06rem;">找不到此航班</div>
         </div>
     </div>
     <!-- layDate引入 -->

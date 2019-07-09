@@ -13,7 +13,7 @@
 
 <body>
     <header>
-        <b class="iconfont icon-zuojiantou-copy back"></b>
+        <a href="javascript:history.go(-1);"><b class="iconfont icon-zuojiantou-copy back"></b></a>
         <h2>接送机</h2>
     </header>
     <!-- fontsize自适应js -->
@@ -56,120 +56,71 @@
                 <div class="info-content" v-show="type == 'join'">
                     <div class="form-row" id="J-endAir">
                         <i class="icon-plane"></i>
-                        <input type="text" placeholder="选择接机航班" readonly="">
+                        <input v-on:click="goToPlane" v-show="showDate == 'false'" type="text" placeholder="选择接机航班"
+                            readonly="">
+                        <span class="" v-if="showDate == 'true'"
+                            v-on:click="goToPlane">{{flightDetails[0].flightNumber}}&nbsp;{{flightDetails[0].arrName}}</span>
                     </div>
 
                     <div class="form-row" id="J-dest">
                         <i class="icon-place"></i>
-                        <span class="placeholder">送达目的地</span>
+                        <span class="placeholder" v-on:click="goToCity" v-show="showCity == 'false'">送达目的地</span>
+                        <span class="" v-if="showCity == 'true'" v-on:click="goToCity">{{city}}</span>
                     </div>
                 </div>
 
                 <div class="info-content2" v-show="type == 'send'">
                     <div class="form-row" id="J-endAir">
                         <i class="icon-plane"></i>
-                        <span class="placeholder">送机场</span>
+                        <span class="placeholder" v-on:click="goToPlane2" v-show="showPlane == 'false'">送达机场</span>
+                        <span class="" v-if="showPlane == 'true'" v-on:click="goToPlane2">{{plane}}</span>
                     </div>
 
                     <div class="form-row" id="J-dest">
                         <i class="icon-place"></i>
-                        <span class="placeholder">自哪儿上车？</span>
+                        <span class="placeholder" v-on:click="goToCity" v-show="showCity2 == 'false'"
+                            data-cityType="send">自哪儿上车？</span>
+                        <span class="" v-if="showCity2 == 'true'" v-on:click="goToCity"
+                            data-cityType="send">{{city2}}</span>
                     </div>
 
                     <div class="form-row" id="J-timeSelect">
                         <i class="icon-time"></i>
-                        <span class="placeholder">用车时间（当地时间）</span>
+                        <span class="placeholder" v-show="layui"
+                            style="pointer-events: none;background: white;">用车时间（当地时间）</span>
+                        <span class="date" v-on:click="showLayui">{{nowDate}} 12:00</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="plane-car">
+        <div class="plane-car" v-show="showCar && type == carType">
             <div class="car-box">
                 <div class="top clearfix">
                     <h5>选择车型</h5>
                 </div>
                 <ul class="cars">
-                    <li class="box-line car-list checked">
+                    <li class="box-line car-list"
+                        v-bind:class="[carIndex == index ? 'checked' : '', index > 2 && carMore ? 'hidden' : '']"
+                        v-for="(item, index) in car" :key="index" v-on:click="selectCar(index)">
                         <ul class="car-item">
                             <div class="radio"> <span class="out"><i class="in"></i></span> </div>
                             <li class="car-type">
-                                <p class="name">紧凑5座 + 中文司导 </p>
+                                <p class="name">{{item.dengji}}{{item.bustype}}{{item.bnumber}}座</p>
                             </li>
-                            <li class="price"><span>227</span></li>
+                            <li class="price"><span>{{item.modee}}</span></li>
                         </ul>
                         <div class="car-info">
-                            <p>参考车型 ：本田锋范,本田思域,丰田威驰或同级别车型</p>
-                        </div>
-                    </li>
-                    <li class="box-line car-list">
-                        <ul class="car-item">
-                            <li class="radio"> <span class="out"><i class="in"></i></span> </li>
-                            <li class="car-type">
-                                <p class="name">舒适5座 + 中文司导 </p>
-                            </li>
-                            <li class="price"><span>240</span></li>
-                        </ul>
-                        <div class="car-info">
-                            <p>参考车型 ：丰田凯美瑞,本田CRV,日产Almera或同级别车型</p>
-                        </div>
-                    </li>
-                    <li class="box-line car-list">
-                        <ul class="car-item">
-                            <li class="radio"> <span class="out"><i class="in"></i></span> </li>
-                            <li class="car-type">
-                                <p class="name">东南亚·经济7座 + 中文司导 </p>
-                            </li>
-                            <li class="price"><span>273</span></li>
-                        </ul>
-                        <div class="car-info">
-                            <p>参考车型：丰田avanza，丰田innova伊诺凡</p>
-                        </div>
-                    </li>
-                    <li class="box-line car-list car-more"
-                        style="transform-origin: 0px 0px; opacity: 1; transform: scale(1, 1);">
-                        <ul class="car-item">
-                            <li class="radio"> <span class="out"><i class="in"></i></span> </li>
-                            <li class="car-type">
-                                <p class="name">东南亚·舒适7座 + 中文司导</p>
-                            </li>
-                            <li class="price"><span>321</span></li>
-                        </ul>
-                        <div class="car-info">
-                            <p>参考车型：丰田Fortuner 、三菱帕杰罗</p>
-                        </div>
-                    </li>
-                    <li class="box-line car-list car-more"
-                        style="transform-origin: 0px 0px; opacity: 1; transform: scale(1, 1);">
-                        <ul class="car-item">
-                            <li class="radio"> <span class="out"><i class="in"></i></span> </li>
-                            <li class="car-type">
-                                <p class="name">舒适9座 + 中文司导</p>
-                            </li>
-                            <li class="price"><span>340</span></li>
-                        </ul>
-                        <div class="car-info">
-                            <p>参考车型 ：丰田海狮,现代H1或同级别车型</p>
-                        </div>
-                    </li>
-                    <li class="box-line car-list car-more"
-                        style="transform-origin: 0px 0px; opacity: 1; transform: scale(1, 1);">
-                        <ul class="car-item">
-                            <li class="radio"> <span class="out"><i class="in"></i></span> </li>
-                            <li class="car-type">
-                                <p class="name">舒适12座 + 中文司导</p>
-                            </li>
-                            <li class="price"><span>406</span></li>
-                        </ul>
-                        <div class="car-info">
-                            <p>参考车型 ：丰田海狮,现代H1或同级别车型</p>
+                            <p>参考车型 ：{{item.pinp}}或同级别车型</p>
                         </div>
                     </li>
                 </ul>
-                <div class="J-more">
-                    <div id="J-more">
-                        <span>收起</span>
-                        <i class="arrow retract"></i>
+
+                <div class="J-more" v-if="car.length > 3">
+                    <div id="J-more" v-on:click="showCAr">
+                        <span v-show="!showCArType">收起</span>
+                        <span v-show="showCArType">更多车型</span>
+                        <i class="" v-bind:class="[carMore ? 'arrow' : 'arrow retract']"></i>
                     </div>
                 </div>
             </div>
@@ -178,36 +129,76 @@
             </div>
         </div>
 
-        <div class="box plane-contact">
+        <div class="box plane-contact" v-show="showCar && type == carType">
             <div class="box-line">
                 <h5>联系人</h5>
                 <input type="text" class="form fix-position J-sa" id="contactName" data-sa-title="联系人" value=""
-                    placeholder="请输入联系人姓名"> <!-- <i class="clearVal icon-ioc56"></i> -->
+                    placeholder="请输入联系人姓名" v-model="name"><!-- <i class="clearVal icon-ioc56"></i> -->
+            </div>
+            <div class="box-line">
+                <h5>证件类型</h5>
+                <input type="radio" id="身份证" value="身份证" v-model="idType">
+                <label for="身份证">身份证</label>
+                <input type="radio" id="护照" value="护照" v-model="idType">
+                <label for="护照">护照</label>
+                <input type="tel" class="form contactTel fix-position J-sa" id="contactTel" value=""
+                    :placeholder="'请输入'+idType" v-model="idCard">
             </div>
             <div class="box-line">
                 <h5>联系电话</h5>
                 <span class="code-box"> + <input type="tel" class="qh" id="" data-sa-title="区号" value=""
-                        placeholder="86"></span>
+                        placeholder="86" v-model="areaCode"></span>
                 <input type="tel" class="form contactTel fix-position J-sa" id="contactTel" data-sa-title="联系电话"
-                    value="" placeholder="请输入联系人电话">
+                    value="" placeholder="请输入联系人电话" v-model="phone">
             </div>
-            <div class="box-line" style="">
+            <div class="box-line" v-show="type == 'join'">
+                <h5>接机牌</h5>
+                <input type="tel" class="form contactTel fix-position J-sa" id="contactTel" value=""
+                    placeholder="请输入接机牌" v-model="board">
+            </div>
+            <div class="box-line">
                 <h5>备注信息</h5>
                 <input type="text" class="form fix-position J-sa" id="contactRemark" data-sa-title="备注信息" value=""
-                    placeholder="给司导捎句话">
+                    placeholder="给司导捎句话" v-model="remark">
             </div>
         </div>
 
-        <div class="plane-confirm">
+        <div v-show="noCar" style="text-align: center; margin: .3rem .22rem .06rem;">暂无包车服务</div>
+
+        <div class="plane-confirm" v-show="showCar && type == carType">
             <div class="confirm-box clearfix">
                 <div class="price-info">
-                    费用总计：￥227
+                    费用总计：￥{{price}}
                 </div>
-                <div class="submit" id="submit">去支付</div>
+                <div class="submit" id="submit" v-on:click="goToPay">去支付</div>
             </div>
         </div>
+
+        <form action="" method="post" id="informationform">
+            <input id="kname"  type="hidden" name="kname" >
+            <input id="type"  type="hidden" name="type" >
+            <input id="IDcard"  type="hidden" name="IDcard" >
+            <input id="phoneNumber"  type="hidden" name="phoneNumber">
+            <input id="pickUp"  type="hidden" name="pickUp" >
+            <input name="note" id="note"  type="hidden"/> 
+            <input name="busXqId" value="" type="hidden" />
+            <input name="supplierId" value="" type="hidden" />
+            <input name="chufatime" value="" type="hidden" />
+            <input name="cityname" value="" type="hidden" />
+            <input name="airportname" value="" type="hidden" />
+            <input name="qifeitime" value="" type="hidden" />
+            <input name="arrtime" value="" type="hidden" />
+            <input name="songdadd" value="" type="hidden" />
+            <input name="baocheType" value="" type="hidden" />
+            <input name="hangban" value="" type="hidden" />
+            <input name="driverMatchingid" value="" type="hidden" />
+            <input name="orderMode" value="" type="hidden" />
+            <input name="mobile" value="1" type="hidden" />
+        </form>
     </div>
 
+    <!-- laydate引入 -->
+    <script src="../layDate-v5.0.9/laydate/laydate.js"></script>
     <!-- vue引入 -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <!-- jq引入 -->

@@ -16,6 +16,13 @@ body {
   background: #f4f4f4;
 }
 
+a {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-user-select: none;
+  -moz-user-focus: none;
+  -moz-user-select: none;
+}
+
 header {
   position: fixed;
   left: 0;
@@ -29,10 +36,9 @@ header {
   border-bottom: 1px solid #dbdbdb;
 }
 header .back {
-  width: 1rem;
-  height: 1rem;
   position: absolute;
   left: .2rem;
+  height: 0.34rem;
   color: #000;
   font-size: .4rem;
 }
@@ -149,7 +155,7 @@ header h2 {
   font-size: .36rem;
   position: absolute;
   height: 100%;
-  width: inherit;
+  width: 5.8rem;
   line-height: 1.1rem;
 }
 #airportService .plane .plane-info .form-row input {
@@ -166,9 +172,7 @@ header h2 {
   margin: 0;
   padding: 0;
 }
-#airportService .plane .plane-info .form-row ::-webkit-input-placeholder,
-#airportService .plane .plane-info .form-row [placeholder],
-#airportService .plane .plane-info .form-row input[placeholder] {
+#airportService .plane .plane-info .form-row ::-webkit-input-placeholder {
   color: #cecece;
 }
 #airportService .plane .plane-info .form-row input[type=text] {
