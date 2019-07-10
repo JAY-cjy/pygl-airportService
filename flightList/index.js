@@ -26,7 +26,7 @@ var vm = new Vue({
             console.log(details);
             // 保存
             localStorage.setItem("newDetails", JSON.stringify(details));
-            window.location.href = "../airportService/index.html";
+            window.location.href = "../airportService/index.html?type=join";
         },
     },
 })

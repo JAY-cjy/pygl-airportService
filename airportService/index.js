@@ -69,13 +69,17 @@ var vm = new Vue({
         var type = this.getvl('type');
         console.log(type)
         if (type) {
-            // 获取送达机场
-            var plane = localStorage.getItem("plane");
-            console.log(plane)
-            this.plane = plane;
-            this.showPlane = 'true';
             this.type = type;
             this.carType = type;
+        }
+
+        // 获取送达机场
+        var plane = localStorage.getItem("plane");
+        console.log(plane)
+
+        if (plane) {
+            this.plane = plane;
+            this.showPlane = 'true';
         }
 
         // 获取起飞时间
@@ -92,6 +96,7 @@ var vm = new Vue({
             this.flightDetails = flightDetails;
             this.showDate = 'true';
             this.flightNumber = flightDetails[0].flightNumber;
+            localStorage.removeItem('newDetails');
         } else {
             // 判断是否存在航班数据
             if (localStorage.getItem("flightDetails")) {
@@ -104,7 +109,7 @@ var vm = new Vue({
         }
 
         // 判断是join/send 获取city数据
-        if (this.type == 'join') {
+        if (this.type == 'join' && localStorage.getItem("city")) {
             var city = JSON.parse(localStorage.getItem("city"));
             console.log(city)
             this.city = city;
@@ -113,7 +118,7 @@ var vm = new Vue({
 
             // 发送请求获取包车数据
             this.getCar();
-        } else {
+        } else if (localStorage.getItem("city2")) {
             var city2 = JSON.parse(localStorage.getItem("city2"));
             console.log(city)
             this.city2 = city2;
@@ -146,7 +151,7 @@ var vm = new Vue({
                 that.sendTime = value;
 
                 if (that.plane == '') {
-                    alert("请选择送达机场");
+                    alert("请选择机场");
                     return;
                 }
 
@@ -188,8 +193,8 @@ var vm = new Vue({
 
         // 去城市页
         goToCity(e) {
-            if (this.flightDetails == "") {
-                alert("请先选择航班");
+            if (this.plane == "") {
+                alert("请先选择机场");
                 return;
             }
 
@@ -221,7 +226,7 @@ var vm = new Vue({
 
             $.ajax({
                 type: 'POST',
-                url: "http://192.168.0.152:8080/pyerp/busprice/H5searchOffer.action",
+                url: "/pyerp/busprice/H5searchOffer.action",
                 data: {
                     qifeitime: that.takeOffTime,
                     arrtime: that.flightDetails[0].arrtime + '降落' + that.flightDetails[0].arrName,
@@ -278,7 +283,7 @@ var vm = new Vue({
 
             $.ajax({
                 type: 'POST',
-                url: "http://192.168.0.152:8080/pyerp/busprice/H5searchOffer.action",
+                url: "/pyerp/busprice/H5searchOffer.action",
                 data: {
                     chufatime: that.sendTime,
                     cityname: that.city2,
@@ -316,24 +321,24 @@ var vm = new Vue({
                 alert("请输入姓名");
                 return;
             }
-            if (this.phone == '') {
-                alert("请输入联系人电话");
-                return;
-            }
-            if (!(/^1[34578]\d{9}$/.test(this.phone))) {
-                alert("请输入合法联系人电话");
-                return;
-            }
             if (this.idType == '身份证') {
                 if (this.idCard == '') {
                     alert("请输入身份证");
                     return;
-                } else if (!/^\d{17}(\d|x)$/i.test(this.idCard)) {
+                } else if (!testId(this.idCard)) {
                     alert("请输入合法身份证");
                     return;
                 }
             } else if (this.idCard == '') {
                 alert("请输入护照");
+                return;
+            }
+            if (this.phone == '') {
+                alert("请输入联系人电话");
+                return;
+            }
+            if (!(/^1[345789]\d{9}$/.test(this.phone))) {
+                alert("请输入合法联系人电话");
                 return;
             }
 
@@ -386,7 +391,7 @@ var vm = new Vue({
                 // console.log(that.price)
                 $.ajax({
                     type: 'POST',
-                    url: "http://192.168.0.152:8080/pyerp/busprice/modelValidation.action",
+                    url: "/pyerp/busprice/modelValidation.action",
                     data: {
                         btime: bTime,
                         etime: eTime,
@@ -415,42 +420,8 @@ var vm = new Vue({
                             $("[name='baocheType']").val(type);
                             $("[name='orderMode']").val(0);
 
-                            $("#informationform").attr("action", "http://192.168.0.152:8080/pyerp/busOrder/wechatPay.action").submit();
+                            $("#informationform").attr("action", "/pyerp/busOrder/wechatPay.action").submit();
 
-
-                            // $.ajax({
-                            //     type: 'POST',
-                            //     url: "http://192.168.0.152:8080/pyerp/busOrder/wechatPay.action",
-                            //     data: {
-                            //         driverMatchingid: res.msg,
-                            //         kname: that.name,
-                            //         type: that.idType,
-                            //         IDcard: that.idCard,
-                            //         phoneNumber: that.phone,
-                            //         pickUp: that.board,
-                            //         note: that.remark,
-                            //         busXqId: that.id,
-                            //         supplierId: that.supplier,
-                            //         chufatime: that.sendTime,
-                            //         cityname: that.city2,
-                            //         airportname: that.plane,
-                            //         qifeitime: that.takeOffTime,
-                            //         arrtime: that.flightDetails[0].arrtime + '降落' + that.flightDetails[0].arrName,
-                            //         songdadd: that.city,
-                            //         baocheType: type,
-                            //         hangban: that.flightNumber,
-                            //         orderMode: 0,
-                            //         mobile: 1,
-                            //     },
-                            //     dataType: 'json',
-                            //     success: function (res) {
-                            //         //请求成功函数内容
-                            //         console.log(res)
-                            //     },
-                            //     error: function (res) {
-                            //         //请求失败函数内容
-                            //     }
-                            // })
                         }
                     },
                     error: function (res) {
@@ -459,17 +430,16 @@ var vm = new Vue({
                 })
             } else if (this.orderMode == '1') {
                 var type;
-                if (that.type == 'join') {
+                if (this.type == 'join') {
                     type = 2;
                 } else {
                     type = 1;
                 }
 
-                $("[name='driverMatchingid']").val(res.msg);
                 $("[name='baocheType']").val(type);
                 $("[name='orderMode']").val(1);
 
-                $("#informationform").attr("action", "http://192.168.0.152:8080/pyerp/busOrder/wechatPay.action").submit();
+                $("#informationform").attr("action", "/pyerp/busOrder/wechatPay.action").submit();
             }
         },
 

@@ -74,7 +74,7 @@ var vm = new Vue({
 
             $.ajax({
                 type: 'POST',
-                url: "http://192.168.0.152:8080/pyerp/busprice/airportTransportationPrice.action",
+                url: "/pyerp/busprice/airportTransportationPrice.action",
                 data: {
                     qifeitime: that.date,
                     hangban: that.flightNumber,
@@ -100,7 +100,7 @@ var vm = new Vue({
                         return;
                     }
 
-                    window.location.replace("../airportService/index.html")
+                    window.location.replace("../airportService/index.html?type=join")
                 },
                 error: function (res) {
                     //请求失败函数内容

@@ -33,11 +33,11 @@ $(document).ready(function () {
         // 判断类型，保存城市
         if (window.location.search.split("=")[1]== 'send') {
             localStorage.setItem("city2", JSON.stringify(temp4));
-            window.location.replace("../airportService/index.html?type=" + 'send')
+            window.location.replace("../airportService/index.html?type=send")
 
         } else {
             localStorage.setItem("city", JSON.stringify(temp4));
-            window.location.replace("../airportService/index.html?type=" + 'join')
+            window.location.replace("../airportService/index.html?type=join")
         }
     });
 });
